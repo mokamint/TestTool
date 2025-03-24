@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:TestTool"
              StartupUri="User/MainWindow.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
 </Application>

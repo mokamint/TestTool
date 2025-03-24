@@ -5,8 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTool"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="FlatButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="2.5, 0, 2.5, 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <!-- Custom Title Bar -->
+        <Border Background="Gray" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" 
+                MouseLeftButtonDown="CustomTitleBar_MouseLeftButtonDown">
+            <Grid>
+                <!-- 메뉴 버튼 -->
+                <Button Width="25" Height="25" HorizontalAlignment="Left" Click="HamburgerButton_Click" Style="{StaticResource FlatButtonStyle}">
+                    <Image Source="/Assets/menu.png"/>
+                </Button>
+                
+                <!-- 타이틀 텍스트 -->
+                <TextBlock Text="TestTool" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                
+                <!-- 시스템 버튼 -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Width="25" Height="20" Click="MinimizeButton_Click" Style="{StaticResource FlatButtonStyle}">
+                        <Image Source="/Assets/minimize.png"/>
+                    </Button>
+
+                    <Button Width="25" Height="20" Click="MaximizeButton_Click" Style="{StaticResource FlatButtonStyle}">
+                        <Image Source="/Assets/maximize.png"/>
+                    </Button>
+
+                    <Button Width="25" Height="20" Click="CloseButton_Click" Style="{StaticResource FlatButtonStyle}">
+                        <Image Source="/Assets/close.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Margin="0,30,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Hamburger Menu -->
+            <StackPanel x:Name="HamburgerMenu" Background="LightGray" Width="200">
+                <Button Content="Menu Item 1"/>
+                <Button Content="Menu Item 2"/>
+                <Button Content="Menu Item 3"/>
+            </StackPanel>
+
+            <!-- Content Area -->
+            <ContentControl Grid.Column="1" x:Name="ContentArea" Background="White"/>
+        </Grid>
     </Grid>
 </Window>
